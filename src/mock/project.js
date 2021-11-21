@@ -14,6 +14,6 @@ Mock.mock('/api/project', 'get', {
     code: 0,
     msg: '',
     // data:[]
-    data:data.data
-  
+    data: data.data
+
 })

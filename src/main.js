@@ -3,32 +3,36 @@ import App from './App.vue'
 import router from './router'
 import Home from './views/Home'
 import showMessage from '@/util/showMessage';
+
 Vue.prototype.$showMessage = showMessage;
-import './mock'
+// import './mock'
 import './api/banner'
 import "./styles/global.less";
-import './eventBus' //事件总线实例
+// import './eventBus' //事件总线实例
 //自定义指令
 import vLoading from '@/directives/loading';
-Vue.directive('loading',vLoading)
+
+Vue.directive('loading', vLoading)
 import vLazy from '@/directives/lazy';
-Vue.directive('lazy',vLazy);
+
+Vue.directive('lazy', vLazy);
 
 import store from './store'
+
 store.dispatch("setting/fetchSetting")
 
 // 解决点两次同一个路由的报错问题
 import Router from 'vue-router'
+
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
-return routerPush.call(this, location).catch(error=> error)
+    return routerPush.call(this, location).catch(error => error)
 }
 new Vue({
-  store,
-  router,
-  render: h => h(App),
+    store,
+    router,
+    render: h => h(App),
 }).$mount('#app')
-
 
 
 // import eventBus from './eventBus';

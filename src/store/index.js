@@ -7,11 +7,11 @@ import project from './project'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
-    modules:{
+    modules: {
         banner,
         setting,
         about,
         project
     },
-    strict:true
+    strict: true
 })

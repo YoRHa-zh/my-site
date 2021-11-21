@@ -1,7 +1,7 @@
 <template>
   <div class="contact-container">
     <div class="wrap">
-      <a href="">
+      <a :href="data.github" target="_blank">
         <div class="icon">
           <Icon type="github" />
         </div>
@@ -44,11 +44,20 @@
 <script>
 import {mapState} from 'vuex'
 import Icon from "@/components/Icon";
+// import {serve} from '@/config.js'
 export default {
   components: {
     Icon,
   },
-  computed:mapState('setting',['loading','data'])
+  computed:{
+    ...mapState('setting',['loading','data']),
+    // qqQrCodeUrl(){
+    //   return serve + this.data.qqQrCode;
+    // },
+    //  weixinQrCodeUrl(){
+    //   return serve + this.data.weixinQrCode;
+    // }
+  },
 };
 </script>
 

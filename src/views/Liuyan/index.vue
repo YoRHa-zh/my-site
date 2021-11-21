@@ -61,7 +61,7 @@ export default {
       }
     },
     async handleSubmit(data, callback) {
-      const resp = await postMessage({data});
+      const resp = await postMessage(data);
       this.Data.rows.unshift(resp);
       this.Data.total++;
       callback("评论成功");

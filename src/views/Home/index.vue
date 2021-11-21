@@ -29,6 +29,66 @@
     </ul>
   </div>
 </template>
+
+<script>
+import Icon from "@/components/Icon";
+import Carousel from "./Carousel";
+import getBanner from "@/api/banner";
+import {mapState} from 'vuex'
+export default {
+  components: {
+    Carousel,
+    Icon
+  },
+  data() {
+    return {
+      index: 0,
+      containerHeight: 0,
+      isChanging: false
+    };
+  },
+  created(){
+    this.$store.dispatch('banner/fetchBanner')
+  },
+  mounted() {
+    this.containerHeight = this.$refs.container.clientHeight;
+    window.addEventListener("resize", this.handleResize);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  computed: {
+    marginTop() {
+      return -this.index * this.containerHeight + "px";
+    },
+    ...mapState('banner',['loading',"data"])
+  },
+  methods: {
+    switchTo(i) {
+      this.index = i
+    },
+    handleWheel(e) {
+      if (this.isChanging) {
+        return;
+      }
+      if (e.deltaY > 100 && this.index < this.data.length - 1) {
+        this.isChanging = true;
+        this.index++;
+      } else if (e.deltaY < -100 && this.index > 0) {
+        this.isChanging = true;
+        this.index--;
+      }
+    },
+    handleTransitionEnd() {
+      this.isChanging = false;
+    },
+    handleResize() {
+      this.containerHeight = this.$refs.container.clientHeight;
+    },
+  },
+};
+</script>
+
 <style lang="less" scoped>
 @import "~@/styles/mixin.less";
 @import "~@/styles/var.less";
@@ -39,12 +99,6 @@
   overflow: hidden;
   position: relative;
   color: #fff;
-  //测试:
-  // width: 60%;
-  // height: 40%;
-  // margin: 100px auto;
-  // border: 2px solid #f40;
-  // overflow: visible;
   ul {
     margin: 0;
     padding: 0;
@@ -119,62 +173,3 @@
   }
 }
 </style>
-<script>
-import Icon from "@/components/Icon";
-import Carousel from "./Carousel";
-import getBanner from "@/api/banner";
-import {mapState} from 'vuex'
-export default {
-  components: {
-    Carousel,
-    Icon
-  },
-  data() {
-    return {
-      index: 0,
-      containerHeight: 0,
-      isChanging: false
-    };
-  },
-  created(){
-    this.$store.dispatch('banner/fetchBanner')
-  },
-  mounted() {
-    this.containerHeight = this.$refs.container.clientHeight;
-    window.addEventListener("resize", this.handleResize);
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.handleResize);
-  },
-  computed: {
-    marginTop() {
-      return -this.index * this.containerHeight + "px";
-    },
-    ...mapState('banner',['loading',"data"])
-  },
-  methods: {
-    switchTo(i) {
-      this.index = i
-    },
-    handleWheel(e) {
-      if (this.isChanging) {
-        return;
-      }
-      if (e.deltaY > 100 && this.index < this.data.length - 1) {
-        this.isChanging = true;
-        this.index++;
-      } else if (e.deltaY < -100 && this.index > 0) {
-        this.isChanging = true;
-        this.index--;
-      }
-    },
-    handleTransitionEnd() {
-      this.isChanging = false;
-    },
-    handleResize() {
-      this.containerHeight = this.$refs.container.clientHeight;
-    },
-  },
-};
-</script>
-

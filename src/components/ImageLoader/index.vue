@@ -6,6 +6,7 @@
 </template>
 
 <script>
+// import {serve} from '@/config.js'
 export default {
     data(){
         return{
@@ -30,7 +31,10 @@ export default {
   computed:{
       OriginLoaded(){
           return this.originLoaded ? 1:0
-      }
+      },
+      // imgUrl(){
+      //   return serve + this.src
+      // }
   },
   methods:{
       handleLoad(){

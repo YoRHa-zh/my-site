@@ -41,7 +41,7 @@ export default {
             },
             async handleSubmit(formData,callback){
                 const resp = await postComment({
-                    blogid:this.$route.params.id,
+                    blogId:this.$route.params.id,
                     ...formData,
                 });
                 this.Data.rows.unshift(resp);
@@ -60,7 +60,6 @@ export default {
                 this.isLoading = false;
             },
             handler(dom){
-                console.log(dom)
                 if(this.isLoading || !dom){
                     return;
                 }

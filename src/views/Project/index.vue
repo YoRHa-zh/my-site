@@ -35,6 +35,7 @@
 </template>
 
 <script>
+// import {serve} from '@/config.js'
 // import {getProject} from '@/api/project'
 // import fetchData from '@/mixins/fetchData'
 import mainScroll from '@/mixins/mainScroll'
@@ -51,6 +52,7 @@ export default {
     Empty
   },
   mixins:[mainScroll('projectContainer')],
+ 
   computed:mapState('project',{
     Data:'data',
     isLoading:'loading'

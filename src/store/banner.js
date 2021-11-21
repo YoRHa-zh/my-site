@@ -1,27 +1,28 @@
-import { getBanner } from '../api/banner'
+import {getBanner} from '../api/banner'
+
 export default {
-    namespaced:true,
-    state:{
-        loading:false,
-        data:[],
+    namespaced: true,
+    state: {
+        loading: false,
+        data: [],
     },
-    mutations:{
-        setLoading(state,payload){
+    mutations: {
+        setLoading(state, payload) {
             state.loading = payload
         },
-        setData(state,payload){
+        setData(state, payload) {
             state.data = payload
         }
     },
-    actions:{
-       async fetchBanner(ctx){
-           if(ctx.state.data.length){
-               return
-           }
-            ctx.commit('setLoading',true)
+    actions: {
+        async fetchBanner(ctx) {
+            if (ctx.state.data.length) {
+                return
+            }
+            ctx.commit('setLoading', true)
             const resp = await getBanner();
-            ctx.commit('setData',resp);
-            ctx.commit('setLoading',false)
+            ctx.commit('setData', resp);
+            ctx.commit('setLoading', false)
         }
     }
 }

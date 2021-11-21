@@ -1,14 +1,14 @@
-export default function (defaultDataValue=null) {
+export default function (defaultDataValue = null) {
     return {
-        data(){
+        data() {
             return {
-                Data:defaultDataValue,
-                isLoading:true
+                Data: defaultDataValue,
+                isLoading: true
             }
         },
         async created() {
             this.Data = await this.fetchData();
-            this.isLoading=false;
-          }
+            this.isLoading = false;
+        }
     }
 }

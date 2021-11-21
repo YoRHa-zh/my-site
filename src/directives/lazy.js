@@ -9,31 +9,34 @@ function setImage(img) {
     const clientHeight = document.documentElement.clientHeight;
     const rect = img.dom.getBoundingClientRect();
     const height = rect.clientHeight || 150;
-    if(rect.top >= -height && rect.top <= clientHeight){
+    if (rect.top >= -height && rect.top <= clientHeight) {
         img.dom.src = img.src;
-        imgs = imgs.filter((i)=>i !== img)        
+        imgs = imgs.filter((i) => i !== img)
     }
 }
+
 function setImages() {
     for (const img of imgs) {
         setImage(img)
     }
 }
+
 function handleScroll() {
     setImages()
-}   
-eventBus.$on('mainScroll',debounce(handleScroll,50));
+}
+
+eventBus.$on('mainScroll', debounce(handleScroll, 50));
 
 export default {
-    inserted(el,bindings){
+    inserted(el, bindings) {
         const img = {
-            dom:el,
-            src:bindings.value
+            dom: el,
+            src: bindings.value
         };
         imgs.push(img);
         setImage(img)
     },
-    unbind(el){
-        imgs = imgs.filter((img)=>img.dom !== el)
+    unbind(el) {
+        imgs = imgs.filter((img) => img.dom !== el)
     }
 }

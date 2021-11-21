@@ -8,6 +8,7 @@
 </template>
 
 <script>
+// import {serve} from '@/config.js'
 export default {
     props:{
         url:{
@@ -18,7 +19,12 @@ export default {
             type:Number,
             default:150
         }
-    }
+    },
+    // computed:{
+    //     imgUrl(){
+    //         return serve + this.url
+    //     }
+    // }
 }
 </script>
 
